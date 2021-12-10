@@ -1,49 +1,12 @@
+"""Rendre le graphe acyclique."""
 import pickle
 import random
 from os.path import exists
+from networkx import DiGraph, NetworkXNoCycle, find_cycle, dag_longest_path
 from citation_graph import get_subgraph
 from print_demo import print_demo
-# from line_profiler_pycharm import profile
-from networkx import DiGraph, simple_cycles, NetworkXError, NetworkXNoCycle, find_cycle, dag_longest_path
 
 
-# * DFS method, recursion limit always reached *
-# def to_acyclic(G: DiGraph) -> None:
-#     """
-#     Converts graph G to an acyclic graph inplace.
-#     :param G: graph
-#     """
-#     def dfs_visit(G, u, discovered, finished) -> None:
-#         """
-#         One step of DFS traversal.
-#         :param G:
-#         :param u:
-#         :param discovered:
-#         :param finished:
-#         """
-#         discovered.add(u)
-#
-#         for v in G.adj[u]:
-#             if v in discovered:  # Detect cycles
-#                 nodes_to_remove.append((u, v))
-#
-#             if v not in finished:  # Recurse into DFS tree
-#                 dfs_visit(G, v, discovered, finished)
-#
-#         discovered.remove(u)
-#         finished.add(u)
-#
-#     nodes_to_remove = []
-#     discovered = set()
-#     finished = set()
-#
-#     for u in G.adj:
-#         if u not in discovered and u not in finished:
-#             dfs_visit(G, u, discovered, finished)
-#
-#     G.remove_edges_from(nodes_to_remove)
-
-# @profile  # to get an idea of the function performances
 def to_acyclic(G: DiGraph) -> None:
     """
     Converts graph G to an acyclic graph inplace.
@@ -101,3 +64,40 @@ if __name__ == '__main__':  # tester la function `to_acyclic`
         if len(steps_list) >= current_max:  # si cette marche aléatoire est plus grande que celle d'avant
             current_max = len(steps_list)
             print(f'max={current_max}, k={k}')  # courbe d'évolution de la longueur max trouvée des marches aléatoires
+
+
+# * DFS method, recursion limit always reached *
+# def to_acyclic(G: DiGraph) -> None:
+#     """
+#     Converts graph G to an acyclic graph inplace.
+#     :param G: graph
+#     """
+#     def dfs_visit(G, u, discovered, finished) -> None:
+#         """
+#         One step of DFS traversal.
+#         :param G:
+#         :param u:
+#         :param discovered:
+#         :param finished:
+#         """
+#         discovered.add(u)
+#
+#         for v in G.adj[u]:
+#             if v in discovered:  # Detect cycles
+#                 nodes_to_remove.append((u, v))
+#
+#             if v not in finished:  # Recurse into DFS tree
+#                 dfs_visit(G, v, discovered, finished)
+#
+#         discovered.remove(u)
+#         finished.add(u)
+#
+#     nodes_to_remove = []
+#     discovered = set()
+#     finished = set()
+#
+#     for u in G.adj:
+#         if u not in discovered and u not in finished:
+#             dfs_visit(G, u, discovered, finished)
+#
+#     G.remove_edges_from(nodes_to_remove)

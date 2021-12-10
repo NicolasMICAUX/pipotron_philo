@@ -81,6 +81,7 @@ class Metropolis:
 
 
 if __name__ == '__main__':
+    # ne fonctionne pas correctement
     G, _ = get_subgraph()
     metropolis = Metropolis()
     path_metropolis1 = metropolis.solve(G, 1, 1000, False, False)

@@ -1,0 +1,10 @@
+pyperclip
+networkx
+nltk
+pandas
+typing
+tqdm
+numpy
+igraph
+matplotlib
+scipy
